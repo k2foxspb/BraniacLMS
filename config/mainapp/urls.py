@@ -2,7 +2,6 @@ from django.urls import path
 
 from mainapp import views
 
-
 urlpatterns = [
     path("", views.MainPageView.as_view()),
     path("news/", views.NewsPageView.as_view()),
