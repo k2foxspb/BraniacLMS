@@ -18,11 +18,18 @@ class News(models.Model):
         self.save()
 
 
-class Course(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Name')
-    description = models.TextField(verbose_name='Description', blank=True, null=True)
-    description_as_markdown = models.BooleanField(default=False, verbose_name='As markdown')
-    cost = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Cost', default=0)
+class CoursesManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(deleted=False)
+
+
+class Courses(models.Model):
+    objects = CoursesManager()
+
+    name = models.CharField(max_length=256, verbose_name="Name")
+    description = models.TextField(verbose_name="Description", blank=True, null=True)
+    description_as_markdown = models.BooleanField(verbose_name="As markdown", default=False)
+    cost = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Cost", default=0)
     cover = models.CharField(max_length=25, default="no_image.svg", verbose_name="Cover")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Created")
     updated = models.DateTimeField(auto_now=True, verbose_name="Edited")
@@ -37,7 +44,7 @@ class Course(models.Model):
 
 
 class Lesson(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE)
     num = models.PositiveIntegerField(verbose_name='Lesson number')
     title = models.CharField(max_length=256, verbose_name="Name")
     description = models.TextField(verbose_name="Description", blank=True, null=True)
@@ -58,7 +65,7 @@ class Lesson(models.Model):
 
 
 class CourseTeachers(models.Model):
-    course = models.ManyToManyField(Course)
+    course = models.ManyToManyField(Courses)
     name_first = models.CharField(max_length=128, verbose_name="Name")
     name_second = models.CharField(max_length=128, verbose_name="Surname")
     day_birth = models.DateField(verbose_name="Birth date")
