@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
-from django.template.context_processors import media
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -173,11 +172,8 @@ LOGGING = {
         "console": {"class": "logging.StreamHandler", "formatter": "console"},
     },
     "loggers": {
-        "django": {"level": "INFO", "handlers": ["console"]},
-        "mainapp": {
-            "level": "DEBUG",
-            "handlers": ["file"],
-        },
+        "django": dict(level="INFO", handlers=["console",]),
+        "mainapp": dict(level="DEBUG", handlers=["file"]),
     },
 }
 

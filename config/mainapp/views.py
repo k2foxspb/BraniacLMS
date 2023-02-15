@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 class MainPageView(TemplateView):
+    logger.info("привет")
     template_name = "mainapp/index.html"
 
 
