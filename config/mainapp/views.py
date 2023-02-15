@@ -70,7 +70,7 @@ class CoursesDetailView(TemplateView):
         context["teachers"] = mainapp_models.CourseTeachers.objects.filter(course=context["course_object"])
         if not self.request.user.is_anonymous:
             if not mainapp_models.CourseFeedback.objects.filter(
-                course=context["course_object"], user=self.request.user
+                    course=context["course_object"], user=self.request.user
             ).count():
                 context["feedback_form"] = mainapp_forms.CourseFeedbackForm(
                     course=context["course_object"], user=self.request.user

@@ -1,6 +1,5 @@
 {% extends 'mainapp/base.html' %}
-{% load static markdownify %}
-{% load crispy_forms_tags %}
+{% load static markdownify crispy_forms_tags cache %}
 
 {% block title %}
 {{ course_object.name }}
