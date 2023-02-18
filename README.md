@@ -8,7 +8,7 @@
 
 - Python > 3.7
   - isort, black, autoflake
-  - Django < 3.3
+  - Django > 4
   - Celery[Redis]
 - Pycharm professional
 - SQLite 3
