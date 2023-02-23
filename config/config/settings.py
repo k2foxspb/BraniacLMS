@@ -173,7 +173,7 @@ LOGGING = {
     },
     "loggers": {
         "django": dict(level="INFO", handlers=["console",]),
-        "mainapp": dict(level="DEBUG", handlers=["file"]),
+        "mainapp": dict(level="INFO", handlers=["file"]),
     },
 }
 
